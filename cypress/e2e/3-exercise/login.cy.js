@@ -294,7 +294,7 @@ describe('Dashboard Itera', () => {
 
   })
 
-  it.only('positive - delete customer details', () => {
+  it('positive - update customer details', () => {
     const username = generateRandomUsername()
     const phoneNumber = generatePhoneNumber()
     const emails = generateRandomEmail()
@@ -315,23 +315,15 @@ describe('Dashboard Itera', () => {
     cy.get('input[value="Search"]').filter('[type="submit"]').click() //button search
     cy.get('.table.table-hover').should('contain.text', emails)
     cy.get('a[href*="/Customer/Edit"]').click()
-    cy.get('').type('')
-    cy.get('').type('')
+    cy.get('#Name').clear().type('QA ' + username + ' update')
+    cy.get('.btn.btn-primary').click() // button save update
+    cy.get('#searching').type('QA ' + username + ' update')
+    cy.get('input[value="Search"]').filter('[type="submit"]').click() //button search
+    cy.get('.table.table-hover').should('contain.text', 'QA ' + username + ' update')
     cy.get('a[href*="/Login/LogOut"]').click()
 
 
   })
-
-  it('positive - edit customer details', () => {
-    cy.visit('https://itera-qa.azurewebsites.net/')
-    cy.get('a[href*="/Login"]').click()
-    cy.get('#Username').clear().type('firstQA')
-    cy.get('#Password').clear().type('qwerty123')
-    cy.get('.btn-primary').click()
-
-
-  })
-
 
 })
 
