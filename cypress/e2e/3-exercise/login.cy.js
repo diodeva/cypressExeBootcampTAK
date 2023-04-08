@@ -144,7 +144,7 @@ function generateRandomUsername() {
 //     cy.visit('https://itera-qa.azurewebsites.net/')
 //     cy.get('a[href*="/Login"]').click()
 //     cy.get('#Username').clear().type('failedtest23')
-//     cy.get('#Password').type('qwerty123')
+//     cy.get('#Password').clear().type('qwerty123')
 //     cy.get('.btn-primary').click()
 //     cy.get('.alert-danger').contains('Wrong username or password')
 
@@ -189,11 +189,13 @@ describe('Dashboard Itera', () => {
 
 
   it('positive - create new customer', () => {
+    const username = generateRandomUsername();
     cy.visit('https://itera-qa.azurewebsites.net/')
     cy.get('a[href*="/Login"]').click()
     cy.get('#Username').type('firstQA')
     cy.get('#Password').type('qwerty123')
     cy.get('.btn-primary').click() //button login
+    cy.get('#Name').type('QA ' + username)
     cy.get('')
     cy.get('a[href*="/Login/LogOut"]').click()
     
@@ -212,6 +214,26 @@ describe('Dashboard Itera', () => {
   })
 
   it('positive - search customer details by email', () => {
+    cy.visit('https://itera-qa.azurewebsites.net/')
+    cy.get('a[href*="/Login"]').click()
+    cy.get('#Username').type('firstQA')
+    cy.get('#Password').type('qwerty123')
+    cy.get('.btn-primary').click()
+
+
+  })
+
+  it('positive - delete customer details', () => {
+    cy.visit('https://itera-qa.azurewebsites.net/')
+    cy.get('a[href*="/Login"]').click()
+    cy.get('#Username').type('firstQA')
+    cy.get('#Password').type('qwerty123')
+    cy.get('.btn-primary').click()
+
+
+  })
+
+  it('positive - edit customer details', () => {
     cy.visit('https://itera-qa.azurewebsites.net/')
     cy.get('a[href*="/Login"]').click()
     cy.get('#Username').type('firstQA')
